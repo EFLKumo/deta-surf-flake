@@ -47,6 +47,25 @@
           makeWrapper
         ];
 
+        desktopItems = [
+          (pkgs.makeDesktopItem {
+            name = "surf";
+            exec = "surf %U";
+            icon = "surf";
+            desktopName = "Deta Surf";
+            comment = "Deta Surf Browser";
+            categories = [
+              "Network"
+              "WebBrowser"
+            ];
+            mimeTypes = [
+              "text/html"
+              "x-scheme-handler/http"
+              "x-scheme-handler/https"
+            ];
+          })
+        ];
+
         buildInputs =
           (with pkgs; [
             glib
@@ -99,6 +118,15 @@
           mkdir -p "$out/bin"
           makeWrapper "$libExecPath/desktop" "$out/bin/${pname}" \
             --prefix LD_LIBRARY_PATH : "$rpath"
+
+          # Install icon
+          for size in 0x0; do
+            mkdir -p "$out/share/icons/hicolor/$size/apps"
+            if [ -f "$libExecPath/usr/share/icons/hicolor/$size/apps/desktop.png" ]; then
+              cp "$libExecPath/usr/share/icons/hicolor/$size/apps/desktop.png" \
+                 "$out/share/icons/hicolor/$size/apps/surf.png"
+            fi
+          done
 
           runHook postInstall
         '';
