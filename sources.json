@@ -1,0 +1,7 @@
+{
+  "x86_64-linux": {
+    "version": "",
+    "appimage_url": "https://github.com/deta/surf/releases/download/1.1.0-beta.1/Surf-1.1.0-beta.1.x86_64.AppImage",
+    "appimage_sha256": "sha256-huNdGNUJWJb0kA6R/NHsCi9jOTxOos4oBhP1PvTGBbg="
+  }
+}
